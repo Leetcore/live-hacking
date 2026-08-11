@@ -5,200 +5,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live-Hacking für Veranstaltungen</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
     <style>
-        * {
-            box-sizing: border-box;
-
+        :root {
+            --font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
         }
+
+        :root{
+            --bg-1: #0a1710;
+            --card-bg: rgba(12,26,16,0.95);
+            --accent: #7ee787;
+            --muted: #c7f9d7;
+            --text: #f0f0f0;
+            --container-max: 800px;
+        }
+
+        * { box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', Arial, sans-serif;
+            margin: 0;
+            font-family: var(--font-family);
             font-weight: 400;
             line-height: 1.6;
-            color: #f0f0f0;
+            color: var(--text);
             background: radial-gradient(circle at top left, #1f4725 0%, #071108 55%, #0a1710 100%);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            font-family: 'Inter', Arial, sans-serif;
-            font-weight: 700;
+        h1, h2, h3{ font-family: var(--font-family); font-weight: 700; margin: 50px 0px 25px 0px; }
+        p, li, a{ font-family: var(--font-family); }
+
+        .container{ margin: 0 auto; max-width: var(--container-max); padding: 2.5rem; }
+
+        .content{ width:100%; background: var(--card-bg); border-radius: 18px; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0px 20px 60px rgba(0,0,0,0.35); overflow:hidden; }
+
+        .part{ padding:2rem; background: linear-gradient(180deg, #000000 0%, rgba(8,8,8,0.95) 60%, rgba(20,20,20,0.85) 100%); }
+        .mid-part{ border-top:1px solid rgba(255,255,255,0.02); border-bottom:1px solid rgba(255,255,255,0.02); }
+        .last-part{ background:transparent; }
+
+        .headline{ font-size: 2rem; color:var(--text); }
+        .subtitle{ color: #c7f9d7; max-width: 48rem; }
+
+        .features{ list-style: none; padding: 0px; margin: 0px; display: grid; gap: 0.75rem; }
+        .features li{ padding: 12px 14px; border-radius: 12px; background:rgba(126,231,135,0.08); }
+
+        .hero-image{ max-width: 50%; margin: 0px auto; }
+        .hero-image img{ width: 100%; height: auto; display: block; border-radius: 12px; object-fit: cover; }
+
+        .center{ text-align: center; }
+        .spacer{ margin: 40px 0px; }
+
+        a{ color:#7ee787; text-decoration: none; transition: color 0.2s ease, text-decoration 0.2s ease; }
+        a:hover, a:focus{ color:#8be493; text-decoration: none; }
+
+        .cta{ display:inline-block; padding:1rem 2rem; background:#53b878; color:#ffffff; border-radius:999px; font-weight:700; text-decoration:none; transition: transform 0.2s ease, background 0.2s ease; }
+        .cta:hover{ transform: translateY(-2px); background: #47e07f; color: #ffffff; }
+
+        /* Bilder nie größer als ihr Container */
+        img{ max-width:100%; height:auto; }
+
+        /* Responsive Anpassungen: Padding reduzieren auf kleineren Bildschirmen */
+        @media (max-width: 900px){
+            .container{ padding:1.5rem; }
+            .part{ padding:1.25rem; }
+            .headline{ font-size:1.75rem; }
         }
 
-        p,
-        li {
-            font-family: 'Inter', Arial, sans-serif;
-            font-weight: 400;
+        @media (max-width: 600px){
+            .container{ padding:1rem; }
+            .part{ padding:0.75rem; }
+            .headline{ font-size:1.4rem; }
+            .spacer{ margin:24px 0; }
+            .hero-image{ max-width:100%; }
         }
 
-        .features li {
-            padding: 0.75rem 1rem;
-            background: rgba(126, 231, 135, 0.08);
-            border-left: 4px solid #4ade80;
-            border-radius: 12px;
-        }
-
-        .container {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .content {
-            max-width: 1200px;
-            width: 100%;
-            background: rgba(12, 26, 16, 0.95);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            overflow: hidden;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-        }
-
-        .left,
-        .right {
-            padding: 3rem;
-        }
-
-        .right {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(180deg, #000000 0%, rgba(8, 8, 8, 0.95) 60%, rgba(20, 20, 20, 0.85) 100%);
-            padding: 2rem;
-            border-radius: 0 20px 20px 0;
-        }
-
-        .hero-image {
-            width: 100%;
-            max-width: 520px;
-            height: 420px;
-            object-fit: cover;
-            display: block;
-            margin: 0 auto;
-        }
-
-        .center {
-            display: block;
-            margin: 0 auto;
-        }
-
-        .subtitle {
-            color: #c7f9d7;
-            max-width: 36rem;
-        }
-
-        a {
-            color: #7ee787;
-            text-decoration: none;
-            transition: color 0.2s ease, text-decoration 0.2s ease;
-        }
-
-        a:hover,
-        a:focus {
-            color: #d1fae5;
-            text-decoration: underline;
-        }
-
-        .features {
-            list-style: none;
-            display: grid;
-            gap: 0.75rem;
-        }
-
-        .features li {
-            padding: 15px 5px;
-        }
-
-        .cta {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: fit-content;
-            padding: 1rem 2rem;
-            background: #53b878;
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 999px;
-            font-weight: 700;
-            transition: transform 0.2s ease, background 0.2s ease;
-        }
-
-        .cta:hover {
-            transform: translateY(-2px);
-            background: #47e07f;
-            text-decoration: none;
-            color: #ffffff;
-        }
-
-        .right {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #bbbbbb;
-        }
-
-        .center {
-            margin: 0 auto;
-            text-align: center;
-            color: #ffffff;
-            margin-top: 1rem;
-        }
-
-        .hero-image {
-            width: 100%;
-            max-width: 520px;
-        }
-
-        .font {
-            color: #111;
-        }
-
-        .black,
-        .black:hover {
-            color: #111;
-        }
-
-        @media (max-width: 900px) {
-            .content {
-                grid-template-columns: 1fr;
-            }
-
-            .right {
-                padding: 0 3rem 3rem;
-            }
-
-            .hero-image {
-                height: 360px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .container {
-                padding: 1rem;
-            }
-
-            .left,
-            .right {
-                padding: 1.5rem;
-            }
-
-            .hero-image {
-                height: 260px;
-            }
+        @media (max-width: 380px){
+            .container{ padding:0.75rem; }
+            .part{ padding:0.5rem; }
         }
     </style>
 </head>
@@ -206,7 +89,7 @@
 <body>
     <main class="container">
         <section class="content">
-            <div class="left">
+            <div class="part">
                 <p>Live-Hacking für Veranstaltungen</p>
                 <h1 class="headline">
                     Hacker-Mindset erleben.
@@ -216,6 +99,15 @@
                     Erleben Sie hautnah, wie Hacker Schwachstellen aufspüren und
                     welche raffinierten Taktiken sie einsetzen.
                 </p>
+            </div>
+            <div class="part mid-part">
+                <div class="hero-image">
+                    <img src="profil-right.png" class="center"
+                        alt="Live-Hacking Vortrag" />
+                    <p class="center">Alexander Fuchs</p>
+                </div>
+            </div>
+            <div class="part last-part">
                 <ul class="features">
                     <li>Live-Hacking:
                         Ich demonstriere live und verständlich,
@@ -235,7 +127,7 @@
 
                 <h2>Fachartikel</h2>
                 <ul class="features">
-                    <li>
+                    <li class="no-background">
                         <a href="https://www.heise.de/news/Verwundbare-Exchange-Server-der-oeffentlichen-Verwaltung-6320504.html"
                             target="_blank" rel="noopener noreferrer">
                             Heise: Mehrere verwundbare Exchange-Server der
@@ -271,17 +163,13 @@
                     Datenschutzforum Bayern, WebMontag Saarbrücken, ...
                 </p>
 
-                <a href="mailto:alex&#64;1337core&#46;de" class="cta">
-                    Kontakt aufnehmen
-                </a>
+                <p class="spacer center">
+                    <a class="cta" href="mailto:alex&#64;1337core&#46;de">
+                        Kontakt aufnehmen
+                    </a>
+                </p>
             </div>
-            <div class="right">
-                <div class="hero-image">
-                    <img src="profil-right.png" class="center"
-                        alt="Live-Hacking Vortrag" /><br />
-                    <p class="font center">Alexander Fuchs</p>
-                </div>
-            </div>
+
         </section>
     </main>
 </body>
